@@ -1,0 +1,58 @@
+type Query {
+  t_askForLocation(
+    chat_id: String!
+  ): T_AskForLocation
+}
+
+type Query {
+  t_closeKeyboard(
+    chat_id: String!
+    message: String!
+  ): T_AskForLocation
+}
+
+type Query {
+  t_getPhoto(
+    photo_id: String!
+  ): PhotoResponse
+}
+
+type From {
+  first_name: String
+  id: Int
+  is_bot: Boolean
+  username: String
+}
+
+type Chat {
+  first_name: String
+  id: Int
+  last_name: String
+  type: String
+}
+
+type Result {
+  date: Int
+  message_id: Int
+  text: String
+  from: From
+  chat: Chat
+}
+
+type T_AskForLocation {
+  ok: Boolean
+  result: Result
+}
+
+type PhotoResult {
+  file_id: String
+  file_unique_id: String
+  file_size: Int
+  file_path: String
+}
+
+type PhotoResponse {
+  ok: Boolean
+  result: PhotoResult
+}
+

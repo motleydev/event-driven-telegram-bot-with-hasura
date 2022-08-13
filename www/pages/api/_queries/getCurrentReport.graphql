@@ -1,0 +1,9 @@
+query GetCurrentReport($t_user_id: String) {
+  report(
+    where: { t_user_id: { _eq: $t_user_id } }
+    limit: 1
+    order_by: { created_at: desc }
+  ) {
+    t_message_id
+  }
+}

@@ -1,0 +1,21 @@
+mutation UpdateImage(
+  $t_message_id: String
+  $t_user_id: String
+  $t_update_id: String
+  $image_url: String
+) {
+  insert_report_one(
+    object: {
+      t_message_id: $t_message_id
+      t_user_id: $t_user_id
+      t_update_id: $t_update_id
+      image_url: $image_url
+    }
+    on_conflict: {
+      constraint: report_t_message_id_key
+      update_columns: [image_url, t_update_id]
+    }
+  ) {
+    id
+  }
+}

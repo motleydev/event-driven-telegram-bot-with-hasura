@@ -1,0 +1,74 @@
+actions:
+  - name: t_askForLocation
+    definition:
+      kind: ""
+      handler: http://host.docker.internal:8081/bot{{BOT_ID}}
+      request_transform:
+        body:
+          action: transform
+          template: |-
+            {
+
+                "chat_id": {{$body.input.chat_id}},
+                "text": "Where is this?",
+                "reply_markup": {
+                  "keyboard": [[{"text": "Add my location", "request_location": true}]],
+                  "one_time_keyboard": true,
+                  "resize_keyboard": true
+                }
+            }
+        method: POST
+        query_params: {}
+        template_engine: Kriti
+        url: '{{$base_url}}/sendMessage'
+        version: 2
+    comment: Ask for Location
+  - name: t_closeKeyboard
+    definition:
+      kind: ""
+      handler: http://host.docker.internal:8081/bot{{BOT_ID}}
+      request_transform:
+        body:
+          action: transform
+          template: |-
+            {
+                "chat_id": {{$body.input.chat_id}},
+                "text": {{$body.input.message}},
+                "reply_markup": {
+                  "remove_keyboard": true
+                }
+            }
+        method: POST
+        query_params: {}
+        template_engine: Kriti
+        url: '{{$base_url}}/sendMessage'
+        version: 2
+    comment: Say thanks for location
+  - name: t_getPhoto
+    definition:
+      kind: ""
+      handler: http://host.docker.internal:8081/bot{{BOT_ID}}
+      request_transform:
+        body:
+          action: transform
+          template: |-
+            {
+              "file_id": {{$body.input.photo_id}}
+            }
+        method: POST
+        query_params: {}
+        template_engine: Kriti
+        url: '{{$base_url}}/getFile'
+        version: 2
+    comment: Get Photo
+custom_types:
+  enums: []
+  input_objects: []
+  objects:
+    - name: From
+    - name: Chat
+    - name: Result
+    - name: T_AskForLocation
+    - name: PhotoResult
+    - name: PhotoResponse
+  scalars: []

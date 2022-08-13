@@ -1,0 +1,25 @@
+mutation CreateReport(
+  $t_message_id: String
+  $t_user_id: String
+  $t_update_id: String
+  $message: String
+  $name: String
+) {
+  insert_report_one(
+    object: {
+      t_message_id: $t_message_id
+      t_update_id: $t_update_id
+      message: $message
+      user: {
+        data: { t_id: $t_user_id, name: $name }
+        on_conflict: { constraint: User_t_id_key, update_columns: name }
+      }
+    }
+    on_conflict: {
+      constraint: report_t_message_id_key
+      update_columns: [message, t_update_id]
+    }
+  ) {
+    id
+  }
+}

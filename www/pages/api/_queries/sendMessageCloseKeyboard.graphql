@@ -1,0 +1,5 @@
+query SendMessageAndCloseKeyboard($chat_id: String!, $message: String!) {
+  t_closeKeyboard(chat_id: $chat_id, message: $message) {
+    ok
+  }
+}

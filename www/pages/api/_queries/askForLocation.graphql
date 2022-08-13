@@ -1,0 +1,5 @@
+query AskForLocation($chat_id: String!) {
+  t_askForLocation(chat_id: $chat_id) {
+    ok
+  }
+}

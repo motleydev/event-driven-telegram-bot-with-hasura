@@ -1,0 +1,21 @@
+mutation UpdateLocation(
+  $t_message_id: String
+  $t_user_id: String
+  $t_update_id: String
+  $location: geometry
+) {
+  insert_report_one(
+    object: {
+      t_message_id: $t_message_id
+      t_user_id: $t_user_id
+      t_update_id: $t_update_id
+      location: $location
+    }
+    on_conflict: {
+      constraint: report_t_message_id_key
+      update_columns: [location, t_update_id]
+    }
+  ) {
+    id
+  }
+}

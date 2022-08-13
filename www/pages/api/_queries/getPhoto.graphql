@@ -1,0 +1,7 @@
+query GetPhoto($photo_id: String!) {
+  t_getPhoto(photo_id: $photo_id) {
+    result {
+      file_path
+    }
+  }
+}

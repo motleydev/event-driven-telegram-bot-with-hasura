@@ -1,0 +1,5 @@
+:80 {
+    root * /srv/{$BOT_ID}/photos
+    file_server browse
+    # respond /health-check 200
+}
